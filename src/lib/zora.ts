@@ -64,7 +64,7 @@ export async function createZoraCoin({
       console.log("Creating coin with params:", {
         name,
         symbol: name.substring(0, 4).toUpperCase(),
-        image: image,
+        imageURI: image, // Using imageURI instead of image
         maxSupply,
         mintPrice
       });
@@ -74,7 +74,7 @@ export async function createZoraCoin({
         {
           name,
           symbol: name.substring(0, 4).toUpperCase(), // Generate a symbol from the name
-          image, // Use 'image' property as specified by the SDK
+          imageURI: image, // Using imageURI property as expected by the SDK
           maxSupply,
           mintPrice
         },
