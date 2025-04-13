@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,14 +23,13 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [symbol, setSymbol] = useState('');
-  const [quantity, setQuantity] = useState('100');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
   
   const handleMint = async () => {
-    if (!title || !description || !symbol || !quantity) {
+    if (!title || !description || !symbol) {
       toast.error("Please fill all the fields");
       return;
     }
@@ -51,8 +49,6 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
         description,
         image: image,
         symbol: symbol.toUpperCase(),
-        maxSupply: parseInt(quantity),
-        // Removing price as we're not selling NFTs
       });
 
       setTransactionHash(result.transactionHash);
@@ -73,7 +69,6 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
     setTitle('');
     setDescription('');
     setSymbol('');
-    setQuantity('100');
     setTransactionHash(null);
     setError(null);
   };
@@ -133,33 +128,17 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Symbol
-                  </label>
-                  <Input
-                    value={symbol}
-                    onChange={(e) => setSymbol(e.target.value)}
-                    placeholder="COIN"
-                    maxLength={5}
-                    className="nobi-input uppercase"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Quantity
-                  </label>
-                  <Input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    min="1"
-                    step="1"
-                    className="nobi-input"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Symbol
+                </label>
+                <Input
+                  value={symbol}
+                  onChange={(e) => setSymbol(e.target.value)}
+                  placeholder="COIN"
+                  maxLength={5}
+                  className="nobi-input uppercase"
+                />
               </div>
             </div>
           </div>

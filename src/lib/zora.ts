@@ -9,7 +9,6 @@ interface CreateZoraCoinParams {
   description: string;
   image: string;
   symbol: string;
-  maxSupply: number;
 }
 
 interface CreateZoraCoinResult {
@@ -22,10 +21,9 @@ export async function createZoraCoin({
   description,
   image,
   symbol,
-  maxSupply,
 }: CreateZoraCoinParams): Promise<CreateZoraCoinResult> {
   try {
-    console.log("Creating Zora coin:", { name, description, image, symbol, maxSupply });
+    console.log("Creating Zora coin:", { name, description, image, symbol });
     
     // Check if wallet is connected
     // @ts-ignore - Window ethereum property
@@ -58,8 +56,7 @@ export async function createZoraCoin({
       console.log("Creating coin with params:", {
         name,
         symbol,
-        imageURI: image,
-        maxSupply
+        image
       });
       
       // Call createCoin with the required arguments according to the SDK
@@ -67,9 +64,9 @@ export async function createZoraCoin({
         {
           name,
           symbol,
-          imageURI: image, // Using imageURI property as expected by the SDK
-          maxSupply,
-          // Removed mintPrice as we're not selling NFTs
+          // The SDK expects a parameter named "image" not "imageURI"
+          image, 
+          // Removed maxSupply as we're no longer tracking quantity
         },
         {
           chain: base, // Explicitly using the Base blockchain
