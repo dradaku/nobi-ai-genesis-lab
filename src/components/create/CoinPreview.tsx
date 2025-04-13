@@ -12,6 +12,7 @@ import {
   Share
 } from "lucide-react";
 import { toast } from "sonner";
+import { createZoraCoin } from "@/lib/zora";
 
 interface CoinPreviewProps {
   image: string | null;
@@ -25,21 +26,40 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
   const [quantity, setQuantity] = useState('100');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
   
-  const handleMint = () => {
+  const handleMint = async () => {
     if (!title || !description || !price || !quantity) {
       toast.error("Please fill all the fields");
       return;
     }
     
+    if (!image) {
+      toast.error("Image is required");
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate minting process
-    setTimeout(() => {
+    try {
+      // Create Zora coin with the SDK
+      const result = await createZoraCoin({
+        name: title,
+        description,
+        image: image,
+        price: parseFloat(price),
+        maxSupply: parseInt(quantity),
+      });
+
+      setTransactionHash(result.transactionHash);
       setIsSubmitting(false);
       setIsSuccess(true);
       toast.success("Your Zora Coin has been created successfully!");
-    }, 2000);
+    } catch (error) {
+      console.error("Error creating coin:", error);
+      toast.error("Failed to create coin. Please try again.");
+      setIsSubmitting(false);
+    }
   };
   
   const handleNewCoin = () => {
@@ -49,6 +69,13 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
     setDescription('');
     setPrice('0.01');
     setQuantity('100');
+    setTransactionHash(null);
+  };
+
+  const viewOnExplorer = () => {
+    if (transactionHash) {
+      window.open(`https://base.blockscout.com/tx/${transactionHash}`, '_blank');
+    }
   };
 
   return (
@@ -163,8 +190,11 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">
-            <Button className="flex gap-2 items-center justify-center">
-              <Save className="h-5 w-5" /> View Coin
+            <Button 
+              className="flex gap-2 items-center justify-center"
+              onClick={viewOnExplorer}
+            >
+              <Save className="h-5 w-5" /> View on Explorer
             </Button>
             
             <Button variant="outline" className="flex gap-2 items-center justify-center">
