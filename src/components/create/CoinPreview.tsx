@@ -9,7 +9,8 @@ import {
   ArrowRight,
   X,
   Save,
-  Share
+  Share,
+  AlertCircle
 } from "lucide-react";
 import { toast } from "sonner";
 import { createZoraCoin } from "@/lib/zora";
@@ -26,6 +27,7 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
   const [quantity, setQuantity] = useState('100');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
   
   const handleMint = async () => {
@@ -40,6 +42,7 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
     }
     
     setIsSubmitting(true);
+    setError(null);
     
     try {
       // Create Zora coin with the SDK
@@ -54,9 +57,10 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
       setTransactionHash(result.transactionHash);
       setIsSubmitting(false);
       setIsSuccess(true);
-      toast.success("Your Zora Coin has been created successfully!");
+      toast.success("Your Zora Coin transaction has been submitted successfully!");
     } catch (error) {
       console.error("Error creating coin:", error);
+      setError(error instanceof Error ? error.message : "Failed to create coin");
       toast.error("Failed to create coin. Please try again.");
       setIsSubmitting(false);
     }
@@ -70,6 +74,7 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
     setPrice('0.01');
     setQuantity('100');
     setTransactionHash(null);
+    setError(null);
   };
 
   const viewOnExplorer = () => {
@@ -159,6 +164,13 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
             </div>
           </div>
           
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-start">
+              <AlertCircle className="h-5 w-5 text-red-500 mr-2 mt-0.5" />
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
+          
           <Button
             className="nobi-button-primary w-full"
             disabled={isSubmitting}
@@ -182,11 +194,11 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
           </div>
           
           <h3 className="text-xl font-bold mb-2">
-            Your Zora Coin is Ready!
+            Transaction Submitted!
           </h3>
           
           <p className="text-muted-foreground mb-8">
-            Your creation has been successfully minted as a Zora Coin on Base.
+            Your transaction to mint a Zora Coin on Base has been submitted.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">

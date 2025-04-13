@@ -1,4 +1,5 @@
 
+import { CoinsSDK } from "@zoralabs/coins-sdk";
 import { createWalletClient, http } from "viem";
 import { base } from "viem/chains";
 
@@ -23,56 +24,65 @@ export async function createZoraCoin({
   maxSupply,
 }: CreateZoraCoinParams): Promise<CreateZoraCoinResult> {
   try {
-    console.log("Creating Zora coin with simulation mode:", { name, description, image, price, maxSupply });
+    console.log("Creating Zora coin:", { name, description, image, price, maxSupply });
     
-    // For demo purposes only: Check if wallet is connected
-    // In a real app, you would use a proper wallet connector like wagmi
+    // Check if wallet is connected
     // @ts-ignore - Window ethereum property
-    if (typeof window !== 'undefined' && window.ethereum) {
-      try {
-        // Try to request account access
-        // @ts-ignore - Window ethereum property
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        console.log("Connected accounts:", accounts);
-      } catch (walletError) {
-        console.warn("Wallet connection failed, but continuing with simulation:", walletError);
-      }
-    } else {
-      console.log("No wallet detected, using simulation mode");
+    if (typeof window === 'undefined' || !window.ethereum) {
+      throw new Error("No wallet detected. Please install MetaMask or another Web3 wallet.");
     }
 
-    // Simulate a delay to mimic network transaction
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Create a simulated transaction hash (64 hex chars after 0x)
-    const transactionHash = "0x" + Array.from({length: 64}, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    
-    // Create a simulated contract address (40 hex chars after 0x)
-    const contractAddress = "0x" + Array.from({length: 40}, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    
-    console.log("Simulated transaction created:", transactionHash);
-    console.log("Simulated contract address:", contractAddress);
-    
-    return {
-      transactionHash,
-      contractAddress,
-    };
+    try {
+      // Request account access
+      // @ts-ignore - Window ethereum property
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      
+      if (!accounts || accounts.length === 0) {
+        throw new Error("No accounts found. Please connect your wallet first.");
+      }
+      
+      const account = accounts[0];
+      console.log("Connected with account:", account);
+      
+      // Initialize Coins SDK
+      const coinsSDK = new CoinsSDK({
+        chain: base,
+        clientProvider: {
+          transport: http()
+        },
+        address: account
+      });
+      
+      // In a production app, you would upload the image to IPFS first
+      // For this implementation, we'll assume the image is already a valid URI
+      
+      // Create the coin with the provided parameters
+      const createParams = {
+        name,
+        description,
+        imageURI: image,
+        maxSupply,
+        mintPrice: BigInt(Math.floor(price * 10 ** 18)) // Convert to wei
+      };
+      
+      console.log("Creating coin with params:", createParams);
+      
+      // Create transaction
+      const tx = await coinsSDK.create(createParams);
+      
+      console.log("Transaction created:", tx);
+      
+      return {
+        transactionHash: tx.hash,
+        // The contract address will be available after the transaction confirms
+        // For now, we return just the transaction hash
+      };
+    } catch (error) {
+      console.error("Error in Zora coin creation:", error);
+      throw error;
+    }
   } catch (error) {
-    console.error("Error in coin creation process:", error);
-    
-    // Always return a successful result for demo purposes
-    const fallbackTx = "0x" + Array.from({length: 64}, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    const fallbackAddress = "0x" + Array.from({length: 40}, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    
-    console.log("Returning fallback transaction data");
-    
-    return {
-      transactionHash: fallbackTx,
-      contractAddress: fallbackAddress
-    };
+    console.error("Error creating Zora coin:", error);
+    throw error;
   }
 }
