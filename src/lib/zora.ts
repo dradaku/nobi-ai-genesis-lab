@@ -48,24 +48,35 @@ export async function createZoraCoin({
       // In a production app, you would upload the image to IPFS first
       // For this implementation, we'll assume the image is already a valid URI
       
-      // Create the coin with the provided parameters using the createCoin function
-      const createParams = {
+      // Create parameters for the coin
+      const mintPrice = BigInt(Math.floor(price * 10 ** 18)); // Convert to wei
+      
+      console.log("Creating coin with params:", {
         name,
         description,
         imageURI: image,
         maxSupply,
-        mintPrice: BigInt(Math.floor(price * 10 ** 18)), // Convert to wei
-        chain: base,
-        clientProvider: {
-          transport: http()
+        mintPrice
+      });
+      
+      // Call createCoin with the required arguments according to the SDK
+      const tx = await createCoin(
+        {
+          name,
+          symbol: name.substring(0, 4).toUpperCase(), // Generate a symbol from the name
+          description,
+          imageURI: image,
+          maxSupply,
+          mintPrice
         },
-        address: account
-      };
-      
-      console.log("Creating coin with params:", createParams);
-      
-      // Create transaction
-      const tx = await createCoin(createParams);
+        {
+          chain: base,
+          clientProvider: {
+            transport: http()
+          },
+        },
+        account
+      );
       
       console.log("Transaction created:", tx);
       
