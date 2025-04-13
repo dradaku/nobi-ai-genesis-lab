@@ -1,5 +1,5 @@
 
-# Nobi AI - Creator Economy Platform
+# Nobi AI - 
 
 ![Nobi AI Banner](https://yourwebsite.com/path-to-banner-image.png)
 
