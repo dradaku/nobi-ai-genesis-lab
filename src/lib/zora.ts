@@ -53,8 +53,8 @@ export async function createZoraCoin({
       
       console.log("Creating coin with params:", {
         name,
-        description,
-        imageURI: image,
+        symbol: name.substring(0, 4).toUpperCase(),
+        image: image,
         maxSupply,
         mintPrice
       });
@@ -64,13 +64,12 @@ export async function createZoraCoin({
         {
           name,
           symbol: name.substring(0, 4).toUpperCase(), // Generate a symbol from the name
-          description,
-          imageURI: image,
+          imageURI: image, // Using imageURI instead of description based on the error
           maxSupply,
           mintPrice
         },
         {
-          chain: base,
+          chain: base, // Explicitly using the Base blockchain
           clientProvider: {
             transport: http()
           },
