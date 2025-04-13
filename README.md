@@ -1,73 +1,132 @@
-# Welcome to your Lovable project
 
-## Project info
+# Nobi AI - Creator Economy Platform
 
-**URL**: https://lovable.dev/projects/5d2c1f79-abdc-4fe2-9760-79bce417f254
+![Nobi AI Banner](https://yourwebsite.com/path-to-banner-image.png)
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+Nobi AI is an innovative platform that empowers creators to build generational wealth using AI technology and Zora Coins. The platform combines creative AI tools with web3 technology, allowing creators to:
 
-**Use Lovable**
+- Generate and remix content with AI assistance
+- Mint their creations as Zora Coins on the Base blockchain
+- Build sustainable income streams through tokenized content
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5d2c1f79-abdc-4fe2-9760-79bce417f254) and start prompting.
+## Key Features
 
-Changes made via Lovable will be committed automatically to this repo.
+### 1. AI Creator Assistant
 
-**Use your preferred IDE**
+An intelligent chat agent that helps creators:
+- Generate content ideas tailored to their style
+- Develop monetization strategies
+- Provide creative direction and suggestions
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 2. AI Image Generation & Remixing
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Transform visuals with powerful AI tools:
+- Upload existing images and apply AI-powered remix styles
+- Generate completely new images from text descriptions
+- Create unique digital assets ready for tokenization
 
-Follow these steps:
+### 3. Zora Coins Integration
+
+Seamlessly mint creations on the Base blockchain:
+- Create your own social tokens with custom parameters
+- Set price, supply, and distribution models
+- Build a community around your tokenized content
+
+## Screenshots
+
+![Homepage](https://yourwebsite.com/path-to-homepage-screenshot.png)
+*The Nobi AI homepage showcasing the platform's key features*
+
+![Creation Studio](https://yourwebsite.com/path-to-creation-studio-screenshot.png)
+*The AI-powered creation studio where users can remix and generate images*
+
+![Minting Interface](https://yourwebsite.com/path-to-minting-screenshot.png)
+*The Zora Coin minting interface for tokenizing creative assets*
+
+## Technology Stack
+
+Nobi AI is built with:
+
+- **Frontend**: React, TypeScript, Vite
+- **UI**: Tailwind CSS, shadcn/ui components
+- **Blockchain**: Zora Coins SDK, Base (Ethereum L2)
+- **AI Tools**: Advanced image generation and text processing
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js & npm - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- MetaMask wallet configured for Base network
+
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to project directory
+cd nobi-ai
 
-# Step 3: Install the necessary dependencies.
+# Install dependencies
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Setting Up MetaMask for Base
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Open MetaMask and go to Settings > Networks
+2. Add a new network with the following details:
+   - Network Name: Base
+   - RPC URL: https://mainnet.base.org
+   - Chain ID: 8453
+   - Currency Symbol: ETH
+   - Block Explorer URL: https://basescan.org
 
-**Use GitHub Codespaces**
+## How to Use Nobi AI
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Explore**: Start by browsing the homepage to understand the platform's capabilities
+2. **Create**: Navigate to the Create page to use the AI tools for content generation
+3. **Mint**: Once you've created your digital asset, customize your Zora Coin parameters and mint
+4. **Share**: Share your minted coin with your audience to build your creator economy
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+To deploy the application, follow these steps:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Open your project on [Lovable](https://lovable.dev/projects/5d2c1f79-abdc-4fe2-9760-79bce417f254)
+2. Click on Share > Publish
 
-## How can I deploy this project?
+## Adding Screenshots
 
-Simply open [Lovable](https://lovable.dev/projects/5d2c1f79-abdc-4fe2-9760-79bce417f254) and click on Share -> Publish.
+To add your own screenshots to this README:
 
-## Can I connect a custom domain to my Lovable project?
+1. Take screenshots of your application's key interfaces
+2. Store these images in your project's public directory or upload to an image hosting service
+3. Replace the placeholder image URLs in this README with your actual image URLs
 
-Yes, you can!
+## Custom Domain Setup
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+To connect a custom domain:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Navigate to Project > Settings > Domains in Lovable
+2. Click Connect Domain and follow the instructions
+3. Note: A paid Lovable plan is required for custom domains
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+- [Zora](https://zora.co/) for the Coins SDK
+- [Base](https://base.org/) for the L2 blockchain infrastructure
+- [Lovable](https://lovable.dev/) for the development platform
