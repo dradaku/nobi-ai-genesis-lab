@@ -1,6 +1,6 @@
 
-// Import the coins-sdk correctly - the package exports Coins, not CoinsSDK
-import { Coins } from "@zoralabs/coins-sdk";
+// Import from @zoralabs/coins-sdk with default import syntax
+import coinsSDK from "@zoralabs/coins-sdk";
 import { createWalletClient, http } from "viem";
 import { base } from "viem/chains";
 
@@ -45,8 +45,11 @@ export async function createZoraCoin({
       const account = accounts[0];
       console.log("Connected with account:", account);
       
-      // Initialize Coins SDK with the correct class name (Coins, not CoinsSDK)
-      const coinsSDK = new Coins({
+      // Get the Coins constructor from the SDK
+      const { Coins } = coinsSDK;
+      
+      // Initialize Coins SDK with the correct instantiation
+      const coins = new Coins({
         chain: base,
         clientProvider: {
           transport: http()
@@ -69,7 +72,7 @@ export async function createZoraCoin({
       console.log("Creating coin with params:", createParams);
       
       // Create transaction
-      const tx = await coinsSDK.create(createParams);
+      const tx = await coins.create(createParams);
       
       console.log("Transaction created:", tx);
       
