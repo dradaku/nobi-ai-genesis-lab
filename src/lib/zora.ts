@@ -36,7 +36,17 @@ export async function createZoraCoin({
     try {
       // Request account access
       // @ts-ignore - Window ethereum property
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await window.ethereum.request({ 
+        method: "eth_requestAccounts",
+        params: [{ eth_accounts: {} }],
+        // Adding the app name that will appear in MetaMask
+        jsonrpc: "2.0",
+        id: 1,
+        AppInfo: {
+          name: "Nobi AI",
+          appOrigin: window.location.origin
+        }
+      });
       
       if (!accounts || accounts.length === 0) {
         throw new Error("No accounts found. Please connect your wallet first.");
@@ -64,7 +74,7 @@ export async function createZoraCoin({
         {
           name,
           symbol: name.substring(0, 4).toUpperCase(), // Generate a symbol from the name
-          imageURI: image, // Using imageURI instead of description based on the error
+          image, // Use 'image' property as specified by the SDK
           maxSupply,
           mintPrice
         },
