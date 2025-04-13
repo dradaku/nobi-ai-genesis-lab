@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +23,7 @@ interface CoinPreviewProps {
 const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('0.01');
+  const [symbol, setSymbol] = useState('');
   const [quantity, setQuantity] = useState('100');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -30,7 +31,7 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
   
   const handleMint = async () => {
-    if (!title || !description || !price || !quantity) {
+    if (!title || !description || !symbol || !quantity) {
       toast.error("Please fill all the fields");
       return;
     }
@@ -49,8 +50,9 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
         name: title,
         description,
         image: image,
-        price: parseFloat(price),
+        symbol: symbol.toUpperCase(),
         maxSupply: parseInt(quantity),
+        // Removing price as we're not selling NFTs
       });
 
       setTransactionHash(result.transactionHash);
@@ -70,7 +72,7 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
     onClear();
     setTitle('');
     setDescription('');
-    setPrice('0.01');
+    setSymbol('');
     setQuantity('100');
     setTransactionHash(null);
     setError(null);
@@ -134,15 +136,14 @@ const CoinPreview: React.FC<CoinPreviewProps> = ({ image, onClear }) => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Price (ETH)
+                    Symbol
                   </label>
                   <Input
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    min="0.001"
-                    step="0.001"
-                    className="nobi-input"
+                    value={symbol}
+                    onChange={(e) => setSymbol(e.target.value)}
+                    placeholder="COIN"
+                    maxLength={5}
+                    className="nobi-input uppercase"
                   />
                 </div>
                 

@@ -8,7 +8,7 @@ interface CreateZoraCoinParams {
   name: string;
   description: string;
   image: string;
-  price: number;
+  symbol: string;
   maxSupply: number;
 }
 
@@ -21,11 +21,11 @@ export async function createZoraCoin({
   name,
   description,
   image,
-  price,
+  symbol,
   maxSupply,
 }: CreateZoraCoinParams): Promise<CreateZoraCoinResult> {
   try {
-    console.log("Creating Zora coin:", { name, description, image, price, maxSupply });
+    console.log("Creating Zora coin:", { name, description, image, symbol, maxSupply });
     
     // Check if wallet is connected
     // @ts-ignore - Window ethereum property
@@ -55,28 +55,21 @@ export async function createZoraCoin({
       const account = accounts[0];
       console.log("Connected with account:", account);
       
-      // In a production app, you would upload the image to IPFS first
-      // For this implementation, we'll assume the image is already a valid URI
-      
-      // Create parameters for the coin
-      const mintPrice = BigInt(Math.floor(price * 10 ** 18)); // Convert to wei
-      
       console.log("Creating coin with params:", {
         name,
-        symbol: name.substring(0, 4).toUpperCase(),
-        imageURI: image, // Using imageURI instead of image
-        maxSupply,
-        mintPrice
+        symbol,
+        imageURI: image,
+        maxSupply
       });
       
       // Call createCoin with the required arguments according to the SDK
       const tx = await createCoin(
         {
           name,
-          symbol: name.substring(0, 4).toUpperCase(), // Generate a symbol from the name
+          symbol,
           imageURI: image, // Using imageURI property as expected by the SDK
           maxSupply,
-          mintPrice
+          // Removed mintPrice as we're not selling NFTs
         },
         {
           chain: base, // Explicitly using the Base blockchain
@@ -92,7 +85,6 @@ export async function createZoraCoin({
       return {
         transactionHash: tx.hash,
         // The contract address will be available after the transaction confirms
-        // For now, we return just the transaction hash
       };
     } catch (error) {
       console.error("Error in Zora coin creation:", error);
