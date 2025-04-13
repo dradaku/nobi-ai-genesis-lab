@@ -1,5 +1,6 @@
 
-import { CoinsSDK } from "@zoralabs/coins-sdk";
+// Import the coins-sdk correctly - the package exports Coins, not CoinsSDK
+import { Coins } from "@zoralabs/coins-sdk";
 import { createWalletClient, http } from "viem";
 import { base } from "viem/chains";
 
@@ -44,8 +45,8 @@ export async function createZoraCoin({
       const account = accounts[0];
       console.log("Connected with account:", account);
       
-      // Initialize Coins SDK
-      const coinsSDK = new CoinsSDK({
+      // Initialize Coins SDK with the correct class name (Coins, not CoinsSDK)
+      const coinsSDK = new Coins({
         chain: base,
         clientProvider: {
           transport: http()
