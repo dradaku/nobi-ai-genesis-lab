@@ -1,6 +1,6 @@
 
-// Import the Coins SDK correctly
-import { Coins } from "@zoralabs/coins-sdk";
+// Import the Coins SDK
+import { createCoin } from "@zoralabs/coins-sdk";
 import { createWalletClient, http } from "viem";
 import { base } from "viem/chains";
 
@@ -45,31 +45,27 @@ export async function createZoraCoin({
       const account = accounts[0];
       console.log("Connected with account:", account);
       
-      // Create a new Coins instance directly
-      const coins = new Coins({
-        chain: base,
-        clientProvider: {
-          transport: http()
-        },
-        address: account
-      });
-      
       // In a production app, you would upload the image to IPFS first
       // For this implementation, we'll assume the image is already a valid URI
       
-      // Create the coin with the provided parameters
+      // Create the coin with the provided parameters using the createCoin function
       const createParams = {
         name,
         description,
         imageURI: image,
         maxSupply,
-        mintPrice: BigInt(Math.floor(price * 10 ** 18)) // Convert to wei
+        mintPrice: BigInt(Math.floor(price * 10 ** 18)), // Convert to wei
+        chain: base,
+        clientProvider: {
+          transport: http()
+        },
+        address: account
       };
       
       console.log("Creating coin with params:", createParams);
       
       // Create transaction
-      const tx = await coins.create(createParams);
+      const tx = await createCoin(createParams);
       
       console.log("Transaction created:", tx);
       
