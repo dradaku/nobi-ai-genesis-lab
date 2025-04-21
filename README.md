@@ -36,13 +36,14 @@ Seamlessly mint creations on the Base blockchain:
 
 ## Screenshots
 
-![Homepage](https://yourwebsite.com/path-to-homepage-screenshot.png)
+![nobi ai homepage](https://github.com/user-attachments/assets/2fe7a24d-485c-4f5e-8a05-e5d6261597ea)
+
 *The Nobi AI homepage showcasing the platform's key features*
 
-![Creation Studio](https://yourwebsite.com/path-to-creation-studio-screenshot.png)
+<img width="627" alt="nobi ai zora remix pics" src="https://github.com/user-attachments/assets/018c6500-4585-4b6f-851c-bc56c343406b" />
 *The AI-powered creation studio where users can remix and generate images*
 
-![Minting Interface](https://yourwebsite.com/path-to-minting-screenshot.png)
+<img width="580" alt="nobi ai creator assistant" src="https://github.com/user-attachments/assets/8f21212e-5735-4184-9b2c-29ec027c95b0" />
 *The Zora Coin minting interface for tokenizing creative assets*
 
 ## Technology Stack
