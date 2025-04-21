@@ -1,7 +1,8 @@
 
-# Nobi AI - 
+# Nobi AI - a creators AI buddy for Zora Coins
 
-![Nobi AI Banner](https://yourwebsite.com/path-to-banner-image.png)
+![nobi ai homepage](https://github.com/user-attachments/assets/fd98404b-b882-4862-ab50-063f801ef4fe)
+
 
 ## Overview
 
@@ -37,14 +38,13 @@ Seamlessly mint creations on the Base blockchain:
 ## Screenshots
 
 ![nobi ai homepage](https://github.com/user-attachments/assets/2fe7a24d-485c-4f5e-8a05-e5d6261597ea)
-
-*The Nobi AI homepage showcasing the platform's key features*
+<br>The Nobi AI homepage showcasing the platform's key features*
 
 <img width="627" alt="nobi ai zora remix pics" src="https://github.com/user-attachments/assets/018c6500-4585-4b6f-851c-bc56c343406b" />
-*The AI-powered creation studio where users can remix and generate images*
+<br>The AI-powered creation studio where users can remix and generate images*
 
 <img width="580" alt="nobi ai creator assistant" src="https://github.com/user-attachments/assets/8f21212e-5735-4184-9b2c-29ec027c95b0" />
-*The Zora Coin minting interface for tokenizing creative assets*
+<br>The Zora Coin minting interface for tokenizing creative assets
 
 ## Technology Stack
 
@@ -95,21 +95,6 @@ npm run dev
 3. **Mint**: Once you've created your digital asset, customize your Zora Coin parameters and mint
 4. **Share**: Share your minted coin with your audience to build your creator economy
 
-## Deployment
-
-To deploy the application, follow these steps:
-
-1. Open your project on [Lovable](https://lovable.dev/projects/5d2c1f79-abdc-4fe2-9760-79bce417f254)
-2. Click on Share > Publish
-
-## Adding Screenshots
-
-To add your own screenshots to this README:
-
-1. Take screenshots of your application's key interfaces
-2. Store these images in your project's public directory or upload to an image hosting service
-3. Replace the placeholder image URLs in this README with your actual image URLs
-
 ## Custom Domain Setup
 
 To connect a custom domain:
@@ -117,10 +102,6 @@ To connect a custom domain:
 1. Navigate to Project > Settings > Domains in Lovable
 2. Click Connect Domain and follow the instructions
 3. Note: A paid Lovable plan is required for custom domains
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
@@ -130,4 +111,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 - [Zora](https://zora.co/) for the Coins SDK
 - [Base](https://base.org/) for the L2 blockchain infrastructure
-- [Lovable](https://lovable.dev/) for the development platform
+
