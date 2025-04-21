@@ -88,7 +88,7 @@ const TextToImage: React.FC<TextToImageProps> = ({ onImageGenerated }) => {
     <div className="nobi-card p-6">
       <h3 className="text-xl font-bold mb-4">Text to Coin</h3>
       <p className="text-muted-foreground mb-6">
-        Don't have an image? Describe what you want to create and our AI will generate it
+        Don't have an image? Say what's on your mind, and our AI will generate it a cool text image for you
       </p>
       
       <div className="space-y-4">
