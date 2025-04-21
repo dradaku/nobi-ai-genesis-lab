@@ -64,9 +64,8 @@ export async function createZoraCoin({
         {
           name,
           symbol,
-          // The SDK expects a parameter named "image" not "imageURI"
-          image, 
-          // Removed maxSupply as we're no longer tracking quantity
+          // The SDK expects the property to be called 'imageURI' not 'image'
+          imageURI: image, 
         },
         {
           chain: base, // Explicitly using the Base blockchain
