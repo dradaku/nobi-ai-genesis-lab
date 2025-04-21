@@ -158,7 +158,7 @@ const Index = () => {
                 <h3 className="text-xl font-bold mb-3">Create & Remix</h3>
                 <p className="text-muted-foreground">
                   Upload your content or use our text-to-coin feature to generate
-                  unique creations enhanced by AI.
+                  unique text creations enhanced by AI.
                 </p>
               </div>
               <div className="hidden md:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2">
